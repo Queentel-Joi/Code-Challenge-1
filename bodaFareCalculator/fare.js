@@ -1,5 +1,5 @@
 function calculateBodaFare() {
-    
+
     let distanceInKm;
     while (true) {
         const input = prompt("Unafika wapi? Mkubwa? Kilometer ngapi?:");

@@ -1,58 +1,33 @@
-const BASIC_FEE_RATE = 0.015; // 1.5%
-const MIN_FEE = 10;           // KES 10
-const MAX_FEE = 70;           // KES 70
+function estimateTransactionFee() {
 
+    let amountToSend;
+    while (true) {
+        const input = prompt("Unatuma ngapi? (KES)");
+        amountToSend = parseFloat(input);
 
-function estimateTransactionFee(amountToSend) {
-    
-    const rawFee = amountToSend * BASIC_FEE_RATE;
-
-    const feeAfterMin = Math.max(rawFee, MIN_FEE);
-
-    const finalFee = Math.min(feeAfterMin, MAX_FEE);
-
-    return finalFee;
-}
-
-
-function runFeeEstimator() {
-    
-    const userInput = prompt("Unatuma Ngapi? (KES):");
-
-    const amountToSend = parseFloat(userInput);
-
-    if (isNaN(amountToSend) || amountToSend <= 0) {
-        console.log("Invalid amount. Please enter a positive number.");
-        return; 
+        if (!isNaN(amountToSend) && amountToSend > 0) {
+            break;
+        } else {
+            alert("Please enter a valid positive number for the amount to send.");
+        }
     }
 
-    const calculatedFee = estimateTransactionFee(amountToSend);
+    const FEE_PERCENTAGE = 0.015; // 1.5%
+    const MIN_FEE = 10;           // KES 10
+    const MAX_FEE = 70;           // KES 70
+
+    let calculatedFee = amountToSend * FEE_PERCENTAGE;
+
+    calculatedFee = Math.max(calculatedFee, MIN_FEE);
+
+    calculatedFee = Math.min(calculatedFee, MAX_FEE);
 
     const totalAmountDebited = amountToSend + calculatedFee;
 
-    console.log(`Sending KES ${amountToSend}:`);
+    console.log(`Sending KES ${amountToSend}`);
     console.log(`Calculated Transaction Fee: KES ${calculatedFee}`);
-    console.log(`Total amount to be debited: KES ${totalAmountDebited}\n`); 
-    console.log("Send Money Securely!");
+    console.log(`Total amount to be debited: KES ${totalAmountDebited}`);
+    console.log("\nSend Money Securely!");
 }
 
-console.log("--- Scenario 1: KES 500 ---");
-runFeeEstimatorWithAmount(500); 
-
-console.log("\n--- Scenario 2: KES 2000 ---");
-runFeeEstimatorWithAmount(2000);
-
-console.log("\n--- Scenario 3: KES 10000 ---");
-runFeeEstimatorWithAmount(10000);
-
-function runFeeEstimatorWithAmount(amount) {
-    const calculatedFee = estimateTransactionFee(amount);
-    const totalAmountDebited = amount + calculatedFee;
-
-    console.log(`Sending KES ${amount}:`);
-    console.log(`Calculated Transaction Fee: KES ${calculatedFee}`);
-    console.log(`Total amount to be debited: KES ${totalAmountDebited}\n`);
-    console.log("Send Money Securely!");
-}
-
-
+estimateTransactionFee();
