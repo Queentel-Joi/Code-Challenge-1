@@ -45,8 +45,6 @@ runFeeEstimatorWithAmount(2000);
 console.log("\n--- Scenario 3: KES 10000 ---");
 runFeeEstimatorWithAmount(10000);
 
-// Helper function to run the estimator directly with a given amount for testing purposes
-// (This bypasses the prompt for automated testing of scenarios)
 function runFeeEstimatorWithAmount(amount) {
     const calculatedFee = estimateTransactionFee(amount);
     const totalAmountDebited = amount + calculatedFee;
