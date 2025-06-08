@@ -1,23 +1,29 @@
 function calculateBodaFare() {
     
-    let distanceInput = prompt("Unafika wapi Mkubwa? Kilometer ngapi?:");
+    let distanceInKm;
+    while (true) {
+        const input = prompt("Unafika wapi? Mkubwa? Kilometer ngapi?:");
+        distanceInKm = parseFloat(input); 
 
-    let distanceInKm = parseFloat(distanceInput);
-
-    if (isNaN(distanceInKm) || distanceInKm < 0) {
-        console.log("Invalid input. Please enter a valid positive number for kilometers.");
-        console.log("Panda Pikipiki! (with valid input next time)"); // A bit of a creative touch on error
-        return; 
+        if (!isNaN(distanceInKm) && distanceInKm >= 0) {
+            break; // Exit loop if input is valid
+        } else {
+            alert("Please enter a valid non-negative number for the distance in kilometers.");
+        }
     }
-    const baseFare = 50; // KES
-    const chargePerKm = 15; // KES
 
-    let distanceCharge = distanceInKm * chargePerKm; 
-    let totalFare = baseFare + distanceCharge; 
+    const BASE_FARE = 50; // KES
+    const CHARGE_PER_KM = 15; // KES per kilometer
+
+    // 3. Calculate the total estimated fare
+    const kilometerCharge = distanceInKm * CHARGE_PER_KM;
+    const totalFare = BASE_FARE + kilometerCharge;
 
     console.log(`Uko kwote? Io ni ${distanceInKm} km:`);
-    console.log(`Ukikalia Pikipiki: KES ${baseFare}`);
-    console.log(`Mpaka Uko: KES ${distanceCharge}`);
+    console.log(`Ukikalia Pikipiki: KES ${BASE_FARE}`);
+    console.log(`Mpaka Uko: KES ${kilometerCharge}`);
     console.log(`Total: KES ${totalFare}`);
-    console.log(`Panda Pikipiki!`); // Final cheerful message
+    console.log("\nPanda Pikipiki!");
 }
+
+calculateBodaFare();
